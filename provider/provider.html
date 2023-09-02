@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Provider Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="MyController">
+        <h1>AngularJS Provider Example</h1>
+
+        <p>Configuration Value: {{ configValue }}</p>
+    </div>
+
+    <!-- AngularJS code -->
+    <script>
+        angular.module('myApp', [])
+            .provider('myService', function () {
+                var configValue = 'Default Configuration';
+
+                this.setConfigValue = function (value) {
+                    configValue = value;
+                };
+
+                this.$get = function () {
+                    // The $get function returns the actual service implementation
+                    return {
+                        getConfigValue: function () {
+                            return configValue;
+                        }
+                    };
+                };
+            });
+
+        angular.module('myApp')
+            .config(['myServiceProvider', function (myServiceProvider) {
+                // Configure the custom service using the provider
+                myServiceProvider.setConfigValue('Custom Configuration');
+            }]);
+
+        angular.module('myApp')
+            .controller('MyController', ['$scope', 'myService', function ($scope, myService) {
+                $scope.configValue = myService.getConfigValue();
+            }]);
+    </script>
+</body>
+</html>

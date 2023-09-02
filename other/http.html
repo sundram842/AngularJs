@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+    <h1i ng-app="myApp" ng-controller="myCtrl">{{name}}</h1i>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $http){
+            $http.get('https://jsonplaceholder.typicode.com/todos/1').then(function(data)
+            {
+                $scope.name=data
+            })
+
+        })
+    </script>
+</body>
+</html>

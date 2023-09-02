@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Filters Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="FilterController">
+        <h1>AngularJS Filters Example</h1>
+
+        <p>Original Price: {{ originalPrice }}</p>
+        <p>Formatted Price: {{ originalPrice | currency }}</p>
+
+        <p>Original Date: {{ originalDate }}</p>
+        <p>Formatted Date: {{ originalDate | date: 'MM/dd/yyyy' }}</p>
+
+        <p>Original Text: {{ originalText }}</p>
+        <p>Uppercase Text: {{ originalText | uppercase }}</p>
+        <p>Lowercase Text: {{ originalText | lowercase }}</p>
+
+        <p>Original Number: {{ originalNumber }}</p>
+        <p>Formatted Number: {{ originalNumber | number: 2 }}</p>
+
+        <p>Original Object:</p>
+        <pre>{{ originalObject | json }}</pre>
+        
+        <h2>Array Filter Example</h2>
+        <input type="text" ng-model="searchText" placeholder="Filter items">
+        <ul>
+            <li ng-repeat="item in items | filter: searchText">{{ item }}</li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('filterApp', [])
+            .controller('FilterController', ['$scope', function ($scope) {
+                $scope.originalPrice = 1000;
+                $scope.originalDate = new Date();
+                $scope.originalText = 'AngularJS Filters';
+                $scope.originalNumber = 3.14159265359;
+                $scope.originalObject = { name: 'John', age: 30 };
+
+                $scope.items = [
+                    'Apple',
+                    'Banana',
+                    'Cherry',
+                    'Date',
+                    'Fig',
+                    'Grape',
+                    'Lemon',
+                    'Mango',
+                    'Orange',
+                    'Pineapple',
+                    'Strawberry',
+                    'Watermelon'
+                ];
+            }]);
+    </script>
+</body>
+</html>

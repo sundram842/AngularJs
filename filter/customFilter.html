@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="customFilterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Custom Filter Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="CustomFilterController">
+        <h1>AngularJS Custom Filter Example</h1>
+
+        <p>Original Text: {{ originalText }}</p>
+        <p>Filtered Text: {{ originalText | customFilter }}</p>
+    </div>
+
+    <script>
+        angular.module('customFilterApp', [])
+            .filter('customFilter', function () {
+                return function (input) {
+                    if (!input) return '';
+
+                    // Custom filter logic here
+                    return input.split('').reverse().join('');
+                };
+            })
+            .controller('CustomFilterController', ['$scope', function ($scope) {
+                $scope.originalText = 'AngularJS Custom Filter Example';
+            }]);
+    </script>
+</body>
+</html>

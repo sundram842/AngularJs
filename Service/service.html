@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>AngularJS HTTP Request Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="./service.js"></script>
+   <script src="./serviceCnt.js"></script>
+ 
+</head>
+
+<body ng-controller="MainController">
+  <button ng-click="fetchData()">Fetch Data</button>
+  <ul>
+    <li ng-repeat="item in data">{{ item }}</li>
+  </ul>
+</body>
+
+</html>

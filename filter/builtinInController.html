@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="filterApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Filters Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="FilterController">
+        <h1>AngularJS Filters Example</h1>
+
+        <p>Formatted Price: {{ formattedPrice }}</p>
+        <p>Formatted Date: {{ formattedDate }}</p>
+        <p>Uppercase Text: {{ uppercaseText }}</p>
+        <p>Lowercase Text: {{ lowercaseText }}</p>
+        <p>Formatted Number: {{ formattedNumber }}</p>
+        <p>Formatted Object:</p>
+        <pre>{{ formattedObject }}</pre>
+
+        <h2>Array Filter Example</h2>
+        <input type="text" ng-model="searchText" placeholder="Filter items">
+        <ul>
+            <li ng-repeat="item in filteredItems">{{ item }}</li>
+        </ul>
+    </div>
+
+    <script>
+        angular.module('filterApp', [])
+            .controller('FilterController', ['$scope', '$filter', function ($scope, $filter) {
+                $scope.originalPrice = 1000;
+                $scope.originalDate = new Date();
+                $scope.originalText = 'AngularJS Filters';
+                $scope.originalNumber = 3.14159265359;
+                $scope.originalObject = { name: 'John', age: 30 };
+
+                $scope.formattedPrice = $filter('currency')($scope.originalPrice);
+                $scope.formattedDate = $filter('date')($scope.originalDate, 'MM/dd/yyyy');
+                $scope.uppercaseText = $filter('uppercase')($scope.originalText);
+                $scope.lowercaseText = $filter('lowercase')($scope.originalText);
+                $scope.formattedNumber = $filter('number')($scope.originalNumber, 2);
+                $scope.formattedObject = $filter('json')($scope.originalObject);
+
+                $scope.items = [
+                    'Apple',
+                    'Banana',
+                    'Cherry',
+                    'Date',
+                    'Fig',
+                    'Grape',
+                    'Lemon',
+                    'Mango',
+                    'Orange',
+                    'Pineapple',
+                    'Strawberry',
+                    'Watermelon'
+                ];
+
+                $scope.filteredItems = $filter('filter')($scope.items, $scope.searchText);
+            }]);
+    </script>
+</body>
+</html>

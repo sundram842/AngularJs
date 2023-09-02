@@ -1,0 +1,15 @@
+Any angularjs filter usually take input and gives output
+* Can be used to
+1)Formate Data
+2)Transform Data
+3)Search/filter Data
+
+*can be used input
+1) Template(views)
+2)Controllers
+3)services
+* Type of filter
+1) Built in (comes with Angularjs)
+  --> number,data,filter,uppercase,lowercase
+  2) Custom Filter
+  -->develop by us

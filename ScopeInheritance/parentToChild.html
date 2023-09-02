@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="scopeInheritanceApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Scope Inheritance Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="ParentController">
+        <h1>Parent Controller</h1>
+        <p>Parent Scope Variable: {{ parentScopeVariable }}</p>
+
+        <div ng-controller="ChildController">
+            <h2>Child Controller</h2>
+            <p>Child Scope Variable: {{ childScopeVariable }}</p>
+            <p>Parent Scope Variable (Inherited): {{ parentScopeVariable }}</p>
+        </div>
+    </div>
+
+    <script>
+        angular.module('scopeInheritanceApp', [])
+            .controller('ParentController', ['$scope', function ($scope) {
+                // Define a variable in the parent scope
+                $scope.parentScopeVariable = 'Parent Data';
+            }])
+            .controller('ChildController', ['$scope', function ($scope) {
+                // Define a variable in the child scope
+                $scope.childScopeVariable = 'Child Data';
+            }]);
+    </script>
+</body>
+</html>
