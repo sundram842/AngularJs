@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$watch Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MyController">
+
+    <h1>Welcome, {{ user.name }}!</h1>
+
+    <input type="text" ng-model="a" placeholder="Enter Number">
+    <input type="text" ng-model="b" placeholder="Enter Number">
+    <button ng-change="changeUserName">Change both input</button>
+    <script>
+        angular.module('myApp', [])
+        .controller('MyController', function($scope) {
+            // Initialize the user object
+            $scope.a = 10;
+             $scope.b = 10;
+
+
+            // Create a $watch expression to monitor changes to user.name
+            $scope.$watchGroup(['a','b'], function(newName, oldName) {
+                console.log('old Name',oldName );
+                 console.log('new Name',newName );
+                if (newName !== oldName) {
+                    console.log('User name changed from ' + oldName + ' to ' + newName);
+                    // You can perform custom logic here when the user's name changes
+                }
+            });
+
+            // Function to change the user's name (for demonstration purposes)
+            $scope.changeUserName = function() {
+                $scope.user.name = 'Jane Smith';
+            };
+        });
+    </script>
+</body>
+</html>

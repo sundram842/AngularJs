@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Deep $watch Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MyController">
+
+    <h1>Deep $watch Example</h1>
+
+    <div>
+        <h2>User Information</h2>
+        <p>Name: {{ user.name }}</p>
+        <p>Age: {{ user.age }}</p>
+    </div>
+    
+    <button ng-click="changeUserInfo()">Change User Info</button>
+
+    <script>
+        angular.module('myApp', [])
+        .controller('MyController', function($scope) {
+            // Initialize the user object
+            $scope.user = {
+                name: 'John Doe',
+                age: 30
+            };
+
+            // Create a deep $watch expression to monitor changes in user object's properties
+            $scope.$watch('user', function(newUser, oldUser) {
+                console.log('old object',oldUser);
+                console.log('New object',newUser);
+
+                // This watches for changes in properties of 'user' (deep watch)
+                console.log('User data changed. New data:', newUser);
+            }, true);
+
+            // Function to change user information (for demonstration purposes)
+            $scope.changeUserInfo = function() {
+                // Modify properties within the 'user' object
+                $scope.user.name = 'Jane Smith';
+                $scope.user.age = 35;
+            };
+        });
+    </script>
+</body>
+</html>

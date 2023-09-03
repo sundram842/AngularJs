@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$watchCollection Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="MyController">
+
+    <h1>$watchCollection Example</h1>
+
+    <div>
+        <h2>Items</h2>
+        <ul>
+            <li ng-repeat="item in items">{{ item }}</li>
+        </ul>
+    </div>
+    
+    <button ng-click="addItem()">Add Item</button>
+
+    <script>
+        angular.module('myApp', [])
+        .controller('MyController', function($scope) {
+            // Initialize an array of items
+            $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+            // Create a $watchCollection to monitor changes in the 'items' array
+            $scope.$watchCollection('items', function(newItems, oldItems) {
+                // This watches for changes in the 'items' array
+                console.log('Items changed. New items:', newItems);
+            });
+
+            // Function to add an item to the 'items' array
+            $scope.addItem = function() {
+                // Push a new item into the array
+                $scope.items.push('New Item');
+            };
+        });
+    </script>
+</body>
+</html>
